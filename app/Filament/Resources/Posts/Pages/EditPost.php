@@ -6,6 +6,7 @@ use App\Filament\Resources\Posts\PostResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 class EditPost extends EditRecord
 {
@@ -14,8 +15,14 @@ class EditPost extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            ViewAction::make()->label('View garam hai'),
+            DeleteAction::make()->label('Delete garam'),
         ];
+    }
+
+    //notfication edit garna milxa ya edit vayesi
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return "La hai post update vayo badai xa";
     }
 }

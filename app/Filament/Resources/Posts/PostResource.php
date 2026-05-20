@@ -46,6 +46,8 @@ class PostResource extends Resource
         ];
     }
 
+
+    /// ya url route change garna milxa
     public static function getPages(): array
     {
         return [

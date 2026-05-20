@@ -19,7 +19,7 @@ class PostsTable
                     ->searchable(),
 
                 TextColumn::make('content')
-                    ->limit(50),
+                    ->limit(50)->searchable(),
 
                 TextColumn::make('created_at')
                     ->dateTime(),

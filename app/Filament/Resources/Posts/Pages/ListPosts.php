@@ -13,7 +13,8 @@ class ListPosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            // CreateAction::make(),//Its shows New {post} by default
+            CreateAction::make()->label('Create New Post'), // label le btn vitra ko content change garna milxa
         ];
     }
 }
