@@ -1,34 +1,43 @@
 <?php
 
-namespace App\Filament\Resources\Posts\Tables;
+namespace App\Filament\Resources\Devices\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class PostsTable
+class DevicesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('name')
                     ->searchable(),
 
-                TextColumn::make('content')
-                    ->limit(50),
+                TextColumn::make('category')->searchable(),
 
-                TextColumn::make('created_at')
-                    ->dateTime(),
+                TextColumn::make('price'),
 
-                TextColumn::make('updated_at')
-                    ->dateTime(),
+                TextColumn::make('brand'),
+
+
+                TextColumn::make('sold_by'),
+
+                TextColumn::make('manufacture_date')->dateTime(),
+
+                TextColumn::make('manufacture_by'),
+
+
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
             ])
             ->recordActions([
                 ViewAction::make(),
@@ -37,6 +46,8 @@ class PostsTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
                 ]),
             ]);
     }
