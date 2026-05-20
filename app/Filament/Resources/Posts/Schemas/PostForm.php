@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\Posts\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class PostForm
 {
@@ -13,10 +15,38 @@ class PostForm
         return $schema->components([
             TextInput::make('title')
                 ->required()
-                ->maxLength(255),
+                ->live(onBlur: true)
+                ->afterStateUpdated(
+                    fn($state, callable $set) =>
+                    $set('slug', Str::slug($state))
+                ),
+
+            TextInput::make('slug')
+                ->required(),
+
+
 
             Textarea::make('content')
-                ->required()
+                ->required(),
+
+            Select::make('status')
+                ->options([
+                    'draft' => 'Draft',
+                    'published' => 'Published',
+                ])
+                ->default('draft')
+                ->required(),
+
+            Select::make('category_id')
+                ->relationship('category', 'name')
+                ->required(),
+
+
+            Select::make('user_id')
+                ->relationship('user', 'name')
+                ->required(),
+
+
         ]);
     }
 }
