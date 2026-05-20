@@ -2,11 +2,14 @@
 
 namespace App\Filament\Resources\Posts\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
+
+use function PHPUnit\Framework\directoryExists;
 
 class PostForm
 {
@@ -28,6 +31,10 @@ class PostForm
 
             Textarea::make('content')
                 ->required(),
+
+            FileUpload::make('featured_image')
+                ->image()->directory('posts')->imageEditor()
+                ->required(false),
 
             Select::make('status')
                 ->options([

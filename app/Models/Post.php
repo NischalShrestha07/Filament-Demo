@@ -14,6 +14,7 @@ class Post extends Model
         'published_at',
         'category_id',
         'user_id',
+        'featured_image'
     ];
 
     public function user()
